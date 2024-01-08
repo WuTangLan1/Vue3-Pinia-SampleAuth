@@ -68,7 +68,7 @@ export default {
     display: flex;
     flex-direction: column;
     justify-content: space-between; 
-    width: 250px;
+    width: 200px;
     background-color: rgb(251, 251, 252);
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
     overflow-y: auto;
@@ -78,6 +78,7 @@ export default {
     left: 0;
     z-index: 1000;
     transition: width 0.5s ease;
+    overflow-x: hidden;
   }
 
   .sidebar.minimized {
@@ -87,6 +88,8 @@ export default {
   .sidebar-nav {
     display: flex;
     flex-direction: column;
+    align-items: center; /* Align items horizontally */
+    gap: 15px; 
     justify-content: center; /* Center the items vertically */
     height: 100%;
     padding: 0;
@@ -101,9 +104,12 @@ export default {
   }
 
   .nav-item {
+    margin-left: -15px;
     width: 100%; /* Full width for each nav item */
     text-align: center; /* Center text */
+    margin-bottom: 10px; /* Increase bottom margin for spacing */
   }
+
 
   .nav-link {
     display: flex;
