@@ -1,10 +1,23 @@
+<script>
+import Sidebar from './components/Homedir/sidebar.vue'
+
+export default {
+  components: {
+    Sidebar
+  }
+}
+</script>
+
+
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
-  <router-view/>
+  <div id="app">
+    <Sidebar />
+    <div class="main-content">
+      <router-view/>
+    </div>
+  </div>
 </template>
+
 
 <style>
 #app {

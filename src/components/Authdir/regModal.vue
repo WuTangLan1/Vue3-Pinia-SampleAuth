@@ -1,0 +1,1 @@
+<!-- This component serves as a modal for the user to register an account on -->
