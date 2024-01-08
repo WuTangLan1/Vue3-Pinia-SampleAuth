@@ -86,25 +86,25 @@ export default {
 
   /* Specific color for home icon */
   .sidebar .nav-link .fas.fa-home {
-    color: #4CAF50; /* Green, for example */
+    color: #1a5a1c; /* Green, for example */
   }
 
   .sidebar .nav-link .fas.fa-user-plus {
-    color: #FF9800; /* Orange, for example */
+    color: #9c1d9c; /* Orange, for example */
   }
 
   .sidebar .nav-link .fas.fa-sign-in-alt {
-    color: #2196F3; /* Blue, for example */
+    color: #1b639e; /* Blue, for example */
   }
 
   .sidebar .nav-link .fas.fa-info-circle {
-    color: #9C27B0; /* Purple, for example */
+    color: #d1ca60; /* Purple, for example */
   }
 
   /* Specific color for toggle arrows */
   .fa-arrow-left,
   .fa-arrow-right {
-    color: #F44336; /* Red, for example */
+    color: #290a07; /* Red, for example */
   }
 
 
@@ -123,24 +123,25 @@ export default {
   }
 
   .sidebar-toggle {
-    position: absolute; /* Fixed position within sidebar */
-    top: 0; /* Align to the top */
-    right: 0; /* Align to the right */
-    z-index: 1100; /* Higher z-index to ensure it's above other elements */
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 1100;
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 40px; /* Adjust width as needed */
-    height: 40px; /* Adjust height as needed */
+    width: 100%; /* Full width of the sidebar */
+    height: 40px;
     cursor: pointer;
-    border: 1px solid rgba(0, 0, 0, 0.1); /* Border for the toggle icon */
-    background-color: rgb(251, 251, 252); /* Match sidebar background */
-    box-shadow: -2px 2px 5px rgba(0, 0, 0, 0.1); /* Shadow for depth */
-    transition: width 0.5s ease; /* Transition for width */
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    background-color: rgb(251, 251, 252);
+    box-shadow: -2px 2px 5px rgba(0, 0, 0, 0.1);
+    transition: width 0.5s ease;
   }
 
   .sidebar.minimized .sidebar-toggle {
-    width: 100%; /* Full width of the minimized sidebar */
+    width: 60px; /* Width of the minimized sidebar */
+    right: 0; /* Align to the right for minimized sidebar */
   }
 
   .nav-items {

@@ -1,8 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '@/views/HomeView.vue'
-import EasyModeView from '@/views/EMview.vue'
-import RegModal from '@/components/Authdir/regModal.vue';
-import LogModal from '@/components/Authdir/logModal.vue';
+import RegView from '@/views/registerView.vue';
+import LogView from '@/views/loginView';
 
 const routes = [
   {
@@ -11,19 +10,14 @@ const routes = [
     component: HomeView
   },
   {
-    path: '/EasyModeView',
-    name: 'EasyMode-View',
-    component: EasyModeView
-  },
-  {
     path: '/register',
     name: 'register',
-    component: RegModal
+    component: RegView
   },
   {
     path: '/login',
     name: 'login',
-    component: LogModal
+    component: LogView
   }
 ]
 
