@@ -53,7 +53,9 @@ export default {
   justify-content: center;
   width: 100%;
   max-width: 600px; /* Adjust the maximum width as needed */
-  margin: auto;
+  margin: auto; /* Center the modal in the available space */
+  position: relative; /* Ensure it's positioned relative to its container */
+  z-index: 2;
   padding: 20px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
