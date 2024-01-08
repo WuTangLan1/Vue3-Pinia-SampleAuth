@@ -1,7 +1,8 @@
 import { defineStore } from "pinia";
 import router from '@/router/index.js';
 import { auth, db } from '@/components/Firebase/fbInit.js';
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
+import { getDoc } from "firebase/firestore";
 import { doc, setDoc } from 'firebase/firestore'; // Import setDoc and doc
 
 export const useAuthStore = defineStore({
@@ -35,14 +36,27 @@ export const useAuthStore = defineStore({
 
         async login() {
             try {
-                const res = await signInWithEmailAndPassword(auth, this.email, this.password)
+                const res = await signInWithEmailAndPassword(auth, this.email, this.password);
+                if (res) {
+                    const user = res.user;
 
-                if (res)
-                {
-                    router.replace({name:'home'})
+                    // Fetch user profile from Firestore
+                    const userProfileRef = doc(db, "profiles", user.uid);
+                    const userProfileSnap = await getDoc(userProfileRef);
+
+                    if (userProfileSnap.exists()) {
+                        // Update state with user info
+                        const userData = userProfileSnap.data();
+                        this.uid = user.uid;
+                        this.name = userData.full_name;
+                        this.email = user.email;
+                        this.dob = userData.dob; // Convert this back from Timestamp if necessary
+                    }
+
+                    router.replace({ name: 'home' });
                 }
-            } catch (error ) {
-                console.log(error)
+            } catch (error) {
+                console.error("Error logging in: ", error);
             }
         },
 

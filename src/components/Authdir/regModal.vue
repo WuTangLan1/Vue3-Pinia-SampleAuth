@@ -1,5 +1,24 @@
 <!-- This component serves as a modal for the user to register an account on -->
 
+  
+<script>
+import { useAuthStore } from '@/store/useAuthStore';
+
+export default {
+  name: 'RegModal',
+  setup() {
+    const { email, password, name, dob, signup } = useAuthStore();
+
+    return {
+      email,
+      password,
+      name,
+      dob,
+      signup
+    };
+  }
+};
+</script>
 
 <template>
     <div class="modal-overlay">
@@ -29,25 +48,7 @@
     </div>
   </div>
 </template>
-  
-  <script>
-  import { useAuthStore } from '@/stores/useAuthStore';
-  
-  export default {
-    name: 'RegModal',
-    setup() {
-      const { email, password, name, dob, signup } = useAuthStore();
-  
-      return {
-        email,
-        password,
-        name,
-        dob,
-        signup
-      };
-    }
-  };
-  </script>
+
   
   <style scoped>
   .modal-overlay {

@@ -6,27 +6,24 @@ export default {
   setup(_, { emit }) {
     const isMinimized = ref(true);
 
-    const expandSidebar = () => {
-      isMinimized.value = false;
-      emit('toggleSidebar', 250); // Expanded width
-    };
-
-    const collapseSidebar = () => {
-      isMinimized.value = true;
-      emit('toggleSidebar', 60); // Minimized width
+    const toggleSidebar = () => {
+      isMinimized.value = !isMinimized.value;
+      emit('toggleSidebar', isMinimized.value ? 60 : 250); // Toggle width
     };
 
     return {
       isMinimized,
-      expandSidebar,
-      collapseSidebar,
+      toggleSidebar,
     };
   }
 }
 </script>
 
 <template>
-    <aside class="sidebar" :class="{ minimized: isMinimized }" @mouseover="expandSidebar" @mouseleave="collapseSidebar">
+    <aside class="sidebar" :class="{ minimized: isMinimized }">
+       <div class="sidebar-toggle" @click="toggleSidebar">
+           <i class="fas" :class="{ 'fa-arrow-left': !isMinimized, 'fa-arrow-right': isMinimized }"></i>
+       </div>
       <nav class="sidebar-nav">
         <ul class="nav-items">
           <!-- Home Link -->
@@ -81,6 +78,39 @@ export default {
     overflow-x: hidden;
   }
 
+  .nav-link i {
+    margin-right: 10px; /* Space between icon and text */
+    /* Default icon color */
+    color: #2c3e50;
+  }
+
+  /* Specific color for home icon */
+  .fa-home {
+    color: #4CAF50; /* Green, for example */
+  }
+
+  /* Specific color for register icon */
+  .fa-user-plus {
+    color: #FF9800; /* Orange, for example */
+  }
+
+  /* Specific color for login icon */
+  .fa-sign-in-alt {
+    color: #2196F3; /* Blue, for example */
+  }
+
+  /* Specific color for info icon */
+  .fa-info-circle {
+    color: #9C27B0; /* Purple, for example */
+  }
+
+  /* Specific color for toggle arrows */
+  .fa-arrow-left,
+  .fa-arrow-right {
+    color: #F44336; /* Red, for example */
+  }
+
+
   .sidebar.minimized {
     width: 60px;
   }
@@ -93,6 +123,27 @@ export default {
     justify-content: center; /* Center the items vertically */
     height: 100%;
     padding: 0;
+  }
+
+  .sidebar-toggle {
+    position: absolute; /* Fixed position within sidebar */
+    top: 0; /* Align to the top */
+    right: 0; /* Align to the right */
+    z-index: 1100; /* Higher z-index to ensure it's above other elements */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px; /* Adjust width as needed */
+    height: 40px; /* Adjust height as needed */
+    cursor: pointer;
+    border: 1px solid rgba(0, 0, 0, 0.1); /* Border for the toggle icon */
+    background-color: rgb(251, 251, 252); /* Match sidebar background */
+    box-shadow: -2px 2px 5px rgba(0, 0, 0, 0.1); /* Shadow for depth */
+    transition: width 0.5s ease; /* Transition for width */
+  }
+
+  .sidebar.minimized .sidebar-toggle {
+    width: 100%; /* Full width of the minimized sidebar */
   }
 
   .nav-items {
