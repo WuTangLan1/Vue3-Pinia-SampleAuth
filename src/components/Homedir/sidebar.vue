@@ -35,11 +35,11 @@ export default {
             </li>
           <!-- Register Link -->
           <li class="nav-item">
-            <router-link to="/register" class="nav-link">
-            <i class="fas fa-user-plus"></i>
-            <span>Register</span>
-            </router-link>
-        </li>
+                <router-link to="/register" class="nav-link">
+                <i class="fas fa-user-plus"></i>
+                <span>Register</span>
+                </router-link>
+            </li>
           <!-- Login Link -->
           <li class="nav-item">
             <router-link to="/login" class="nav-link">
@@ -85,22 +85,19 @@ export default {
   }
 
   /* Specific color for home icon */
-  .fa-home {
+  .sidebar .nav-link .fas.fa-home {
     color: #4CAF50; /* Green, for example */
   }
 
-  /* Specific color for register icon */
-  .fa-user-plus {
+  .sidebar .nav-link .fas.fa-user-plus {
     color: #FF9800; /* Orange, for example */
   }
 
-  /* Specific color for login icon */
-  .fa-sign-in-alt {
+  .sidebar .nav-link .fas.fa-sign-in-alt {
     color: #2196F3; /* Blue, for example */
   }
 
-  /* Specific color for info icon */
-  .fa-info-circle {
+  .sidebar .nav-link .fas.fa-info-circle {
     color: #9C27B0; /* Purple, for example */
   }
 

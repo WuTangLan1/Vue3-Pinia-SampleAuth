@@ -21,7 +21,6 @@ export default {
 </script>
 
 <template>
-    <div class="modal-overlay">
       <div class="modal">
         <form @submit.prevent="signup">
           <div class="input-group">
@@ -46,30 +45,16 @@ export default {
         </button>
       </form>
     </div>
-  </div>
 </template>
 
   
   <style scoped>
-  .modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    animation: fadeIn 0.3s;
-  }
+
   
   .modal {
     background: white;
     padding: 20px;
     border-radius: 5px;
-    transform: scale(0);
-    animation: scaleUp 0.3s forwards;
   }
   
   .input-group {
@@ -99,16 +84,6 @@ export default {
     border-radius: 4px;
   }
 
-  @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-@keyframes scaleUp {
-  from { transform: scale(0); }
-  to { transform: scale(1); }
-}
-
 button:disabled {
   background-color: grey;
 }
@@ -126,9 +101,5 @@ button:hover {
   animation: spin 2s linear infinite;
 }
 
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
   </style>
   
