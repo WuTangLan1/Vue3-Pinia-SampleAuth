@@ -21,11 +21,14 @@
             <label for="dob">Date of Birth</label>
             <input type="date" id="dob" v-model="dob" required>
           </div>
-          <button type="submit">Sign Up</button>
-        </form>
-      </div>
+          <button type="submit" :disabled="loading">
+          Sign Up
+          <span v-if="loading" class="loader"></span>
+        </button>
+      </form>
     </div>
-  </template>
+  </div>
+</template>
   
   <script>
   import { useAuthStore } from '@/stores/useAuthStore';
@@ -57,12 +60,15 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    animation: fadeIn 0.3s;
   }
   
   .modal {
     background: white;
     padding: 20px;
     border-radius: 5px;
+    transform: scale(0);
+    animation: scaleUp 0.3s forwards;
   }
   
   .input-group {
@@ -91,5 +97,37 @@
     color: white;
     border-radius: 4px;
   }
+
+  @keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scaleUp {
+  from { transform: scale(0); }
+  to { transform: scale(1); }
+}
+
+button:disabled {
+  background-color: grey;
+}
+
+button:hover {
+  background-color: darkblue; /* Darker shade when hovered */
+}
+
+.loader {
+  border: 2px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 2px solid blue;
+  width: 12px;
+  height: 12px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
   </style>
   

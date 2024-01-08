@@ -1,23 +1,31 @@
 <script>
-import Sidebar from './components/Homedir/sidebar.vue'
+import { ref } from 'vue';
+import Sidebar from './components/Homedir/sidebar.vue';
 
 export default {
   components: {
     Sidebar
+  },
+  setup() {
+    const sidebarWidth = ref(250); // Default sidebar width
+
+    const toggleSidebar = (newWidth) => {
+      sidebarWidth.value = newWidth;
+    };
+
+    return { sidebarWidth, toggleSidebar };
   }
 }
 </script>
 
-
 <template>
   <div id="app">
-    <Sidebar />
-    <div class="main-content">
+    <Sidebar @toggleSidebar="toggleSidebar" />
+    <div class="main-content" :style="{ marginLeft: sidebarWidth + 'px' }">
       <router-view/>
     </div>
   </div>
 </template>
-
 
 <style>
 #app {
@@ -30,7 +38,6 @@ export default {
 }
 
 .main-content {
-    margin-left: 250px; /* Adjust based on the expanded width of the sidebar */
     transition: margin-left 0.5s ease;
   }
 
