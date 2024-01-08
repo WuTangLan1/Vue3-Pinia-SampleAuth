@@ -1,7 +1,7 @@
 <template>
   <div class="modal-container">
-    <h2 class="form-heading">Register Form</h2>
     <div class="modal">
+      <h2 class="form-heading">Register Form</h2>
       <form @submit.prevent="signup" class="form-layout">
         <div class="input-group left-column">
           <label for="email">Email</label>

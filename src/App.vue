@@ -36,14 +36,18 @@ export default {
   color: #2c3e50;
   display: flex;
 }
+
+
 .main-content {
+  flex-grow: 1; /* Take available space */
   transition: margin-left 0.5s ease;
-  margin-left: 250px; /* Adjust this value if necessary */
-  width: 100%;
+  overflow: hidden; /* In case the content overflows */
 }
-  @media (max-width: 768px) {
-    .main-content {
-      margin-left: 60px; /* Adjust based on the collapsed width of the sidebar */
-    }
+
+@media (max-width: 768px) {
+  .main-content {
+    margin-left: 60px; /* Adjust based on the collapsed width of the sidebar */
   }
+}
+
 </style>

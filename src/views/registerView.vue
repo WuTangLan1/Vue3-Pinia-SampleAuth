@@ -21,51 +21,42 @@
   </script>
   
   <style scoped>
-  .register-view-container {
-    position: relative;
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .background-container {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-  }
-  
-  .dark-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Dark overlay to enhance contrast */
-    z-index: 1;
-  }
-  .background-image {
-  position: absolute;
+.register-view-container {
+  display: grid; /* Use grid to center children */
+  place-items: center; /* Center children */
+  width: 100%;
+  height: calc(100vh - 60px); /* Subtract the height of your header if there is one */
+}
+
+.background-container {
+  grid-area: 1 / 1; /* Position in the first cell of the grid */
+}
+
+.background-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  z-index: 0;
 }
 
-  
-  .modal-container {
-    position: relative;
-    z-index: 2;
-    background: rgba(255, 255, 255, 0.95);
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-    width: 90%;
-    max-width: 600px; /* Control the width of the modal */
-  }
+.modal-container {
+  grid-area: 1 / 1; /* Position in the same cell as the background */
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 600px; /* Adjust the maximum width as needed */
+  margin: auto; /* Center the modal in the available space */
+  position: relative; /* Ensure it's positioned relative to its container */
+  z-index: 2;
+  padding: 20px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Ensure the modal is centered within the .modal-container */
+.modal-container .modal {
+  margin: auto;
+}
   </style>
   

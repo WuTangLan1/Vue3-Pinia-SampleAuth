@@ -56,6 +56,9 @@ export default {
           </li>
         </ul>
       </nav>
+      <div class="profile-container">
+        <h3 class="profile-title">Profile</h3>
+      </div>
     </aside>
   </template>
   
@@ -111,7 +114,18 @@ export default {
   .sidebar.minimized {
     width: 60px;
   }
+  
+  .profile-container {
+    border-top: 1px solid #ccc; /* Border at the top */
+    padding: 15px; /* Padding inside the container */
+    text-align: center; /* Center align the text */
+  }
 
+  .profile-title {
+    margin-top: 0; /* Remove top margin */
+    color: #333; /* Text color */
+    font-size: 1.2em; /* Font size */
+  }
   .sidebar-nav {
     display: flex;
     flex-direction: column;
