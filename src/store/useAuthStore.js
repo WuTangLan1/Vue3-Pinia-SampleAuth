@@ -1,37 +1,37 @@
 import { defineStore } from "pinia";
 import router from '@/router/index.js';
-import auth from '@/components/Firebase/fbInit.js'
+import { auth, db } from '@/components/Firebase/fbInit.js';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "firebase/auth";
-import { useRouter } from "vue-router";
+import { doc, setDoc } from 'firebase/firestore'; // Import setDoc and doc
 
 export const useAuthStore = defineStore({
     id:'storeAuth',
-    state: () => {
-        return {
-            email: '',
-            password: '',
-            name:'',
-            dob : null
-        }
-    },
-    getters : {
-
-    },
-    actions : {
-        async signup(){
-
+    state: () => ({
+        email: '',
+        password: '',
+        name: '',
+        dob: null
+    }),
+    actions: {
+        async signup() {
             try {
-                const user = await createUserWithEmailAndPassword(auth, this.email, this.password);
-            
-                if(user )
-                {
-                    router.replace({name:'home'})
-                }
-            } catch (error){
-                console.log(error)
-            }
+                const userCredential = await createUserWithEmailAndPassword(auth, this.email, this.password);
+                const user = userCredential.user;
+                
+                if (user) {
+                    // Create a document in Firestore with the same user ID
+                    const userProfile = doc(db, "profiles", user.uid);
+                    await setDoc(userProfile, {
+                        full_name: this.name,
+                        dob: this.dob // Make sure dob is in the correct format or use a Timestamp
+                    });
 
-        } ,
+                    router.replace({ name: 'home' });
+                }
+            } catch (error) {
+                console.error("Error signing up: ", error);
+            }
+        },
 
         async login() {
             try {

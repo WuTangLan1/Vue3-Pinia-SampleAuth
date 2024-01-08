@@ -26,18 +26,17 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  display: flex;
 }
 
-nav {
-  padding: 30px;
-}
+.main-content {
+    margin-left: 250px; /* Adjust based on the expanded width of the sidebar */
+    transition: margin-left 0.5s ease;
+  }
 
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-nav a.router-link-exact-active {
-  color: #42b983;
-}
+  @media (max-width: 768px) {
+    .main-content {
+      margin-left: 60px; /* Adjust based on the collapsed width of the sidebar */
+    }
+  }
 </style>
