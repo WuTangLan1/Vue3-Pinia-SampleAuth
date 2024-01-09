@@ -5,12 +5,14 @@ export const useSidebarStore = defineStore({
   id: 'storeSidebar',
   state: () => ({
     isMin: true,
-    loading: false,
+    isDarkMode: false, // Add this line
   }),
   actions: {
     toggle() {
       this.isMin = !this.isMin;
-      console.log(this.isMin)
+    },
+    toggleTheme() { // Add this method
+      this.isDarkMode = !this.isDarkMode;
     }
   }
 });

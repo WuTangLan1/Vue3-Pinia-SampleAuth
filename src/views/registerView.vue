@@ -1,4 +1,8 @@
 <script>
+import p1 from '@/assets/p1.png';
+import p2 from '@/assets/p2.png';
+import p3 from '@/assets/p3.png';
+import p4 from '@/assets/p4.png';
 import RegModal from '@/components/Authdir/RegModal.vue';
 
 export default {
@@ -8,14 +12,9 @@ export default {
   },
   data() {
     return {
-      images: {
-        p1: require('@/assets/p1.png'),
-        p2: require('@/assets/p2.png'),
-        p3: require('@/assets/p3.png'),
-        p4: require('@/assets/p4.png')
-      }
+      images: { p1, p2, p3, p4 },
     };
-  }
+  },
 };
 </script>
 

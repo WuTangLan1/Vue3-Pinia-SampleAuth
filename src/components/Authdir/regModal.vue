@@ -4,15 +4,21 @@ import { useAuthStore } from '@/store/useAuthStore';
 export default {
   name: 'RegModal',
   setup() {
-    const store = useAuthStore();
+    const { email, password, name, dob, signup, loading } = useAuthStore();
 
     return {
-      ...store, // This will spread all reactive properties including `loading` if it's defined in the store
-      signup: store.signup
+      email,
+      password,
+      name,
+      dob,
+      signup,
+      loading, // Include this property in the return object
     };
   }
 };
 </script>
+
+
 
 
 <template>
@@ -66,22 +72,21 @@ export default {
   padding-bottom: 5px; /* Space for the underline */
   text-align: center; /* Center the text */
 }
-
 .form-heading::after {
   content: '';
   position: absolute;
-  left: 0;
-  right: 0;
+  left: 50%;
   bottom: 0;
-  height: 4px; /* Make the underline thicker */
+  transform: translateX(-50%) scaleX(0);
+  transform-origin: 0% 50%; /* Start growth from the left */
+  width: 100%; /* Full width to match text */
+  height: 4px;
   background-color: #2c3e50;
-  transition: all 0.3s ease;
-  transform: scaleX(0); /* Start with no width */
-  transform-origin: center; /* Grow from the center */
+  transition: transform 0.3s ease;
 }
 
 .form-heading:hover::after {
-  transform: scaleX(1); /* Grow to full width on hover */
+  transform: translateX(-50%) scaleX(1); /* Full width on hover */
 }
 
 .modal {

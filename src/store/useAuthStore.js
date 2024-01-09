@@ -11,7 +11,8 @@ export const useAuthStore = defineStore({
         email: '',
         password: '',
         name: '',
-        dob: null
+        dob: null,
+        loading: false,
     }),
     actions: {
         async signup() {
