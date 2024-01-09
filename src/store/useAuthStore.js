@@ -16,11 +16,6 @@ export const useAuthStore = defineStore({
     }),
     actions: {
         async signup() {
-            console.log('this email: ', this.email)
-            if (!this.validateEmail(this.email)) {
-                console.error("Invalid email format");
-                return;
-              }
             try {
                 console.log(this.email, this.password)
                 const userCredential = await createUserWithEmailAndPassword(auth, this.email, this.password);
@@ -73,11 +68,7 @@ export const useAuthStore = defineStore({
             router.replace({name: 'login'})
             this.resetInp();
         },
-
-        validateEmail(email) {
-            const re = /^(([^<>()[]\\.,;:\s@"]+(\.[^<>()[]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-            return re.test(String(email).toLowerCase());
-          },          
+          
           resetInp() {
             this.email = '',
             this.password = '',

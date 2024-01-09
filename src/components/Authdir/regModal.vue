@@ -4,47 +4,42 @@ import { useAuthStore } from '@/store/useAuthStore';
 export default {
   name: 'RegModal',
   setup() {
-    const { email, password, name, dob, signup, loading } = useAuthStore();
-
+    // Use the store directly in the template
+    const authStore = useAuthStore();
+    
+    // Now, authStore is reactive and can be used directly in the template with v-model
     return {
-      email,
-      password,
-      name,
-      dob,
-      signup,
-      loading, // Include this property in the return object
+      authStore, // only return the store
     };
   }
 };
 </script>
 
 
-
-
 <template>
-    <div class="modal">
-      <h2 class="form-heading">Register Form</h2>
-      <form @submit.prevent="signup" class="form-layout">
-        <div class="input-group left-column">
-          <label for="email">Email</label>
-          <input type="email" id="email" v-model="email" required>
-          
-          <label for="password">Password</label>
-          <input type="password" id="password" v-model="password" required>
-        </div>
-        <div class="input-group right-column">
-          <label for="name">Full Name</label>
-          <input type="text" id="name" v-model="name" required>
+  <div class="modal">
+    <h2 class="form-heading">Register Form</h2>
+    <form @submit.prevent="authStore.signup" class="form-layout">
+      <div class="input-group left-column">
+        <label for="email">Email</label>
+        <input type="email" id="email" v-model="authStore.email" required>
+        
+        <label for="password">Password</label>
+        <input type="password" id="password" v-model="authStore.password" required>
+      </div>
+      <div class="input-group right-column">
+        <label for="name">Full Name</label>
+        <input type="text" id="name" v-model="authStore.name" required>
 
-          <label for="dob">Date of Birth</label>
-          <input type="date" id="dob" v-model="dob" required>
-        </div>
-        <button type="submit" :disabled="loading">
-          Sign Up
-          <span v-if="loading" class="loader"></span>
-        </button>
-      </form>
-    </div>
+        <label for="dob">Date of Birth</label>
+        <input type="date" id="dob" v-model="authStore.dob" required>
+      </div>
+      <button type="submit" :disabled="authStore.loading">
+        Sign Up
+        <span v-if="authStore.loading" class="loader"></span>
+      </button>
+    </form>
+  </div>
 </template>
 
 <style scoped>
@@ -82,9 +77,9 @@ export default {
 
 .form-layout {
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  flex-direction: row; /* Align children in a row */
+  flex-wrap: wrap; /* Allow wrapping to next line */
+  justify-content: space-between; /* Space between the input columns */
   gap: 20px; /* Space between the input columns */
 }
 
@@ -94,7 +89,6 @@ export default {
   width: calc(50% - 10px); /* Adjust the width of each column, accounting for the gap */
   box-sizing: border-box; /* Includes padding and border in the width calculation */
 }
-
 .label {
   display: block;
   margin-bottom: 5px; /* Spacing below each label */
@@ -148,15 +142,12 @@ button:hover {
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .form-layout {
-    flex-direction: column;
+    flex-direction: column; /* Stack input groups vertically on smaller screens */
   }
 
   .input-group {
-    width: 100%; /* Full width for smaller screens */
-  }
-
-  .modal-container {
-    padding: 20px; /* Reduced padding on smaller screens */
+    width: 100%; /* Full width input groups on smaller screens */
   }
 }
+
 </style>
