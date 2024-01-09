@@ -53,15 +53,19 @@ export default {
 .modal-container {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 40px; /* Provides spacing around the modal */
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  width: 100%;
+  justify-content: center; /* Center vertically */
+  align-items: center; /* Center horizontally */
+  width: 100%; /* Allows the container to fill the width of its parent */
   max-width: 600px; /* Maximum width of the modal */
-  margin: auto; /* Centers the modal horizontally */
-  position: relative;
-  z-index: 2;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.95); /* Slightly transparent white */
+  border-radius: 8px; /* Optional: rounded corners */
+  margin: auto; /* Centers the modal in the available space */
+}
+
+.modal {
+  width: 100%; /* Ensures that the modal width is the same as the container */
 }
 
 .form-heading {
@@ -71,22 +75,6 @@ export default {
   position: relative; /* Establish a positioning context for the pseudo-element */
   padding-bottom: 5px; /* Space for the underline */
   text-align: center; /* Center the text */
-}
-.form-heading::after {
-  content: '';
-  position: absolute;
-  left: 50%;
-  bottom: 0;
-  transform: translateX(-50%) scaleX(0);
-  transform-origin: 0% 50%; /* Start growth from the left */
-  width: 100%; /* Full width to match text */
-  height: 4px;
-  background-color: #2c3e50;
-  transition: transform 0.3s ease;
-}
-
-.form-heading:hover::after {
-  transform: translateX(-50%) scaleX(1); /* Full width on hover */
 }
 
 .modal {

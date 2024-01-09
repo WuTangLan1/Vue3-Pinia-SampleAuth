@@ -55,23 +55,10 @@ export default {
 }
 
 .main-content {
-  flex-grow: 1; /* Takes up all available space */
-  display: flex;
-  justify-content: center; /* Center horizontally */
-  align-items: center; /* Center vertically */
-  padding: 20px; /* Add padding if needed */
-  overflow: hidden; /* Prevents content from overflowing */
-}
-
-/* RegisterView.vue */
-.register-view-container {
-  display: flex; /* Make this a flex container */
-  flex-direction: column; /* Stack children vertically */
-  justify-content: center; /* Center children vertically */
-  align-items: center; /* Center children horizontally */
-  width: 100%;
-  height: 100%; /* Take up all available height */
-  padding: 20px; /* Add padding if needed */
+  flex-grow: 1;
+  padding: 20px;
+  transition: margin-left 0.5s ease;
+  overflow: hidden; /* Add this to prevent content overflow */
 }
 </style>
 

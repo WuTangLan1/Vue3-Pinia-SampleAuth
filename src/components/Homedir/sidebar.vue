@@ -24,19 +24,12 @@ export default {
     };
   </script>
 
-
 <template>
   <aside class="sidebar" :class="{ minimized: isMinimized }">
-       <div class="sidebar-toggle" @click="toggleSidebar">
-           <i class="fas" :class="{ 'fa-arrow-left': !isMinimized, 'fa-arrow-right': isMinimized }"></i>
-       </div>
-      <nav class="sidebar-nav">
-        <div class="theme-switch">
-          <button @click="toggleDarkMode">
-            <i :class="['fas', isDarkMode ? 'fa-sun' : 'fa-moon']"></i>
-          </button>
-        </div>
-        <ul class="nav-items">
+    <div class="sidebar-toggle" @click="toggleSidebar">
+      <i class="fas" :class="{ 'fa-arrow-left': !isMinimized, 'fa-arrow-right': isMinimized }"></i>
+    </div>
+    <nav class="sidebar-nav">
           <!-- Home Link -->
             <li class="nav-item">
                 <router-link to="/" class="nav-link">
@@ -65,14 +58,18 @@ export default {
               <span>Info</span>
             </router-link>
           </li>
-        </ul>
-      </nav>
-      <div class="profile-container">
-        <i class="fas fa-user-circle profile-icon"></i> 
+          <li class="nav-item theme-switch" @click="toggleDarkMode">
+        <i :class="['fas', isDarkMode ? 'fa-sun' : 'fa-moon']"></i>
+        <span v-show="!isMinimized">{{ isDarkMode ? 'Light Mode' : 'Dark Mode' }}</span>
+      </li>
+      <!-- Profile Section -->
+      <div class="profile-container" v-show="!isMinimized">
+        <i class="fas fa-user-circle profile-icon"></i>
         <span class="profile-title">Profile</span>
       </div>
-    </aside>
-  </template>
+    </nav>
+  </aside>
+</template>
   
   
   <style scoped>
@@ -217,6 +214,28 @@ export default {
     margin-bottom: 10px; /* Increase bottom margin for spacing */
   }
 
+  .nav-item.theme-switch {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  color: inherit; /* Use current text color */
+  background-color: transparent; /* No background */
+  border: none; /* No border */
+  width: 100%;
+  text-align: left; /* Align text to the left */
+}
+
+.nav-item.theme-switch:hover {
+  background-color: #f1f1f1; /* Same hover effect as other nav items */
+}
+
+.sidebar.minimized .theme-switch {
+  justify-content: center; /* Center the icon when sidebar is minimized */
+}
+
+.sidebar.minimized .theme-switch span {
+  display: none; /* Hide text when sidebar is minimized */
+}
 
   .nav-link {
     display: flex;

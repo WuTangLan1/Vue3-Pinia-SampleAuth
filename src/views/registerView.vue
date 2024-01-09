@@ -39,7 +39,7 @@ export default {
   justify-content: center; /* Center horizontally */
   align-items: center; /* Center vertically */
   width: 100%; /* Full width */
-  height: 100%; /* Full height */
+  height: 100vh; /* Full height of the viewport */
   padding: 20px; /* Add padding if needed */
   box-sizing: border-box; /* Includes padding in size calculations */
 }
