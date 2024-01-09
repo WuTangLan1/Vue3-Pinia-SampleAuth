@@ -17,6 +17,10 @@ export default {
       sidebarWidth.value = newVal ? 60 : 250;
     });
 
+    watch(() => sidebarStore.isDarkMode, (newValue) => {
+      document.body.setAttribute('data-theme', newValue ? 'dark' : 'light');
+    });
+
     const toggleSidebar = () => {
       sidebarStore.toggle(); // This calls the action in the store
     };
@@ -39,6 +43,7 @@ export default {
 
 /* App.vue */
 <style>
+@import './assets/style.css';
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -50,14 +55,23 @@ export default {
 }
 
 .main-content {
-  flex-grow: 1;
+  flex-grow: 1; /* Takes up all available space */
   display: flex;
-  width: 100%;
   justify-content: center; /* Center horizontally */
   align-items: center; /* Center vertically */
-  transition: margin-left 0.5s ease;
   padding: 20px; /* Add padding if needed */
+  overflow: hidden; /* Prevents content from overflowing */
 }
 
+/* RegisterView.vue */
+.register-view-container {
+  display: flex; /* Make this a flex container */
+  flex-direction: column; /* Stack children vertically */
+  justify-content: center; /* Center children vertically */
+  align-items: center; /* Center children horizontally */
+  width: 100%;
+  height: 100%; /* Take up all available height */
+  padding: 20px; /* Add padding if needed */
+}
 </style>
 

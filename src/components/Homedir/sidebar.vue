@@ -13,14 +13,16 @@ export default {
       sidebarStore.toggle();
     };
 
-    return {
-      isMinimized, // use the computed property here
-      toggleSidebar,
-    };
-  }
-}
-</script>
+    const isDarkMode = computed(() => sidebarStore.isDarkMode);
 
+    const toggleDarkMode = () => {
+      sidebarStore.toggleDarkMode();
+    };
+
+    return { isMinimized, toggleSidebar, isDarkMode, toggleDarkMode };
+    },
+    };
+  </script>
 
 
 <template>
@@ -29,6 +31,11 @@ export default {
            <i class="fas" :class="{ 'fa-arrow-left': !isMinimized, 'fa-arrow-right': isMinimized }"></i>
        </div>
       <nav class="sidebar-nav">
+        <div class="theme-switch">
+          <button @click="toggleDarkMode">
+            <i :class="['fas', isDarkMode ? 'fa-sun' : 'fa-moon']"></i>
+          </button>
+        </div>
         <ul class="nav-items">
           <!-- Home Link -->
             <li class="nav-item">
@@ -243,6 +250,22 @@ export default {
   .sidebar.minimized .nav-link span {
     display: none; /* Hide text when minimized */
   }
+
+  .theme-switch {
+  position: absolute;
+  bottom: 10px; /* Adjust as needed */
+  right: 10px; /* Adjust as needed */
+}
+
+.theme-switch button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.sidebar.minimized .theme-switch {
+  position: static; /* Align it with minimized nav items */
+}
 
   @media (max-width: 768px) {
     .sidebar {

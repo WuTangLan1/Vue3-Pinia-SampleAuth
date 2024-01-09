@@ -1,0 +1,183 @@
+:root {
+    /* Light theme colors */
+    --background-light: #fbfbfc; /* Light background for elements */
+    --text-color-light: #2c3e50; /* Light text color */
+    --primary-color-light: #ffffff; /* Light primary color for elements like buttons or links */
+    --border-color-light: #e1e1e1; /* Light border color for elements */
+  
+    /* Dark theme colors */
+    --background-dark: #333; /* Dark background for elements */
+    --text-color-dark: #fff; /* Dark text color */
+    --primary-color-dark: #2980b9; /* Dark primary color for elements like buttons or links */
+    --border-color-dark: #444; /* Dark border color for elements */
+  }
+  
+  /* Default theme */
+  body {
+    --background: var(--background-light);
+    --text-color: var(--text-color-light);
+    --primary-color: var(--primary-color-light);
+    --border-color: var(--border-color-light);
+  }
+  
+  /* Dark theme overrides */
+  body[data-theme='dark'] {
+    --background: var(--background-dark);
+    --text-color: var(--text-color-dark);
+    --primary-color: var(--primary-color-dark);
+    --border-color: var(--border-color-dark);
+  }
+  
+  /* Apply the variables to your styles */
+  .sidebar {
+    background-color: var(--background);
+    color: var(--text-color);
+    border-color: var(--border-color);
+    /* ... other sidebar styles ... */
+  }
+  
+  /* Same for other components, for example: */
+ /* Layout */
+.container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  
+  .main-content {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+  }
+  
+  /* Grid */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1rem;
+  }
+  
+  /* Forms */
+  .form-field {
+    margin-bottom: 1rem;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+  
+  input, select, textarea, button {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  button {
+    background: var(--primary-color);
+    color: var(--text-color);
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  button:hover {
+    background: darken(var(--primary-color), 10%);
+  }
+  
+  /* Feedback and Messages */
+  .message {
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+    border-radius: 4px;
+  }
+  
+  .message--error {
+    background-color: #ffdddd;
+    border-color: #ff5c5c;
+  }
+  
+  .message--success {
+    background-color: #ddffdd;
+    border-color: #5cff5c;
+  }
+  
+  /* Navigation & Sidebar */
+  .sidebar {
+    width: 250px;
+    background: var(--background);
+    color: var(--text-color);
+    padding: 1rem;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .nav-link {
+    display: block;
+    padding: 0.5rem;
+    color: var(--text-color);
+    text-decoration: none;
+    transition: background-color 0.3s;
+  }
+  
+  .nav-link:hover {
+    background-color: var(--primary-color);
+  }
+  
+  .nav-link--active {
+    background-color: darken(var(--primary-color), 10%);
+  }
+  
+  /* Accessibility */
+  a:focus, button:focus, input:focus, select:focus, textarea:focus {
+    outline: 3px solid var(--primary-color);
+    outline-offset: 2px;
+  }
+  
+  /* Transitions for Theme Switching */
+  .theme-switch {
+    cursor: pointer;
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+  }
+  
+  /* Theming */
+  [data-theme='dark'] {
+    background-color: var(--background-dark);
+    color: var(--text-color-dark);
+  }
+  
+  [data-theme='light'] {
+    background-color: var(--background-light);
+    color: var(--text-color-light);
+  }
+  
+  /* Media Queries */
+  @media (max-width: 768px) {
+    .sidebar {
+      width: 60px;
+    }
+  
+    .main-content, .container {
+      padding: 1rem;
+    }
+  }
+  
+  /* Additional Utility Classes */
+  .hidden {
+    display: none;
+  }
+  
+  .visible {
+    display: block;
+  }
+  
+  /* Adjustments for Icons (Font Awesome) */
+  .fas {
+    margin-right: 0.5rem;
+  }
+  

@@ -1,18 +1,18 @@
 // useSidebarStore.js
-import { defineStore } from "pinia";
+import { defineStore } from 'pinia';
 
 export const useSidebarStore = defineStore({
   id: 'storeSidebar',
   state: () => ({
     isMin: true,
-    isDarkMode: false, // Add this line
+    isDarkMode: false, // Add this for dark mode state
   }),
   actions: {
     toggle() {
       this.isMin = !this.isMin;
     },
-    toggleTheme() { // Add this method
+    toggleDarkMode() { // Method to toggle dark mode
       this.isDarkMode = !this.isDarkMode;
-    }
-  }
+    },
+  },
 });
