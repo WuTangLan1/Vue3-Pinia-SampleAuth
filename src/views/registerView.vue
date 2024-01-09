@@ -34,14 +34,19 @@ export default {
 </template>
   
   <style scoped>
-.register-view-container {
+.modal-container {
   display: flex;
-  justify-content: center; /* Center horizontally */
-  align-items: center; /* Center vertically */
-  width: 100%; /* Full width */
-  height: 100vh; /* Full height of the viewport */
-  padding: 20px; /* Add padding if needed */
-  box-sizing: border-box; /* Includes padding in size calculations */
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  margin: auto; /* This will center the modal-container if it's not full width */
+  padding: 20px;
+  box-sizing: border-box;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
   
   .background-container {

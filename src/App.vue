@@ -1,8 +1,7 @@
-// App.vue
 <script>
 import { ref, watch } from 'vue';
 import Sidebar from './components/Homedir/sidebar.vue';
-import { useSidebarStore } from '@/store/useSidebarStore'; // Adjust the path as necessary
+import { useSidebarStore } from '@/store/useSidebarStore';
 
 export default {
   components: {
@@ -11,54 +10,43 @@ export default {
   
   setup() {
     const sidebarStore = useSidebarStore();
-    const sidebarWidth = ref(sidebarStore.isMin ? 60 : 250);
+    // This will hold the current width of the sidebar
+    const sidebarWidth = ref(sidebarStore.isMin ? '60px' : '200px');
 
-    watch(() => sidebarStore.isMin, (newVal) => {
-      sidebarWidth.value = newVal ? 60 : 250;
+    watch(() => sidebarStore.isMin, (isMinimized) => {
+      sidebarWidth.value = isMinimized ? '60px' : '200px';
     });
 
-    watch(() => sidebarStore.isDarkMode, (newValue) => {
-      document.body.setAttribute('data-theme', newValue ? 'dark' : 'light');
+    watch(() => sidebarStore.isDarkMode, (isDarkMode) => {
+      document.body.setAttribute('data-theme', isDarkMode ? 'dark' : 'light');
     });
 
-    const toggleSidebar = () => {
-      sidebarStore.toggle(); // This calls the action in the store
-    };
-
-    return { sidebarWidth, toggleSidebar };
+    return { sidebarWidth };
   }
 }
 </script>
 
-
 <template>
-  <div id="app">
-    <Sidebar @toggleSidebar="toggleSidebar" />
-    <div class="main-content" :style="{ marginLeft: sidebarWidth + 'px' }">
-      <router-view/>
+  <div id="app" class="app-container">
+    <Sidebar />
+    <!-- Apply the sidebarWidth as a left margin to the main content -->
+    <div class="main-content" :style="{ 'margin-left': sidebarWidth }">
+      <router-view />
     </div>
   </div>
 </template>
 
-
-/* App.vue */
 <style>
 @import './assets/style.css';
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+
+.app-container {
   display: flex;
-  height: 100vh; /* Full viewport height */
+  height: 100vh;
 }
 
 .main-content {
   flex-grow: 1;
-  padding: 20px;
-  transition: margin-left 0.5s ease;
-  overflow: hidden; /* Add this to prevent content overflow */
+  transition: margin-left 0.5s; /* Smooth transition for the margin */
+  overflow: hidden;
 }
 </style>
-

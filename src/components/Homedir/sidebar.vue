@@ -30,6 +30,7 @@ export default {
       <i class="fas" :class="{ 'fa-arrow-left': !isMinimized, 'fa-arrow-right': isMinimized }"></i>
     </div>
     <nav class="sidebar-nav">
+      <ul class="nav-items">
           <!-- Home Link -->
             <li class="nav-item">
                 <router-link to="/" class="nav-link">
@@ -51,7 +52,6 @@ export default {
               <span>Login</span>
             </router-link>
           </li>
-          <!-- Info Link -->
           <li class="nav-item">
             <router-link to="/info" class="nav-link">
               <i class="fas fa-info-circle"></i>
@@ -59,9 +59,10 @@ export default {
             </router-link>
           </li>
           <li class="nav-item theme-switch" @click="toggleDarkMode">
-        <i :class="['fas', isDarkMode ? 'fa-sun' : 'fa-moon']"></i>
-        <span v-show="!isMinimized">{{ isDarkMode ? 'Light Mode' : 'Dark Mode' }}</span>
-      </li>
+            <i :class="['fas', isDarkMode ? 'fa-sun' : 'fa-moon']"></i>
+            <span>{{ isDarkMode ? 'Light Mode' : 'Dark Mode' }}</span>
+          </li>
+        </ul>
       <!-- Profile Section -->
       <div class="profile-container" v-show="!isMinimized">
         <i class="fas fa-user-circle profile-icon"></i>
@@ -163,6 +164,7 @@ export default {
     justify-content: center; /* Center the items vertically */
     height: 100%;
     padding: 0;
+    
   }
 
   .sidebar-toggle {
@@ -223,18 +225,7 @@ export default {
   border: none; /* No border */
   width: 100%;
   text-align: left; /* Align text to the left */
-}
-
-.nav-item.theme-switch:hover {
-  background-color: #f1f1f1; /* Same hover effect as other nav items */
-}
-
-.sidebar.minimized .theme-switch {
-  justify-content: center; /* Center the icon when sidebar is minimized */
-}
-
-.sidebar.minimized .theme-switch span {
-  display: none; /* Hide text when sidebar is minimized */
+  cursor: pointer; 
 }
 
   .nav-link {
@@ -271,10 +262,33 @@ export default {
   }
 
   .theme-switch {
-  position: absolute;
-  bottom: 10px; /* Adjust as needed */
-  right: 10px; /* Adjust as needed */
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  width: 100%;
+  text-align: left; /* Align text to the left */
+  color: inherit;
+  background-color: transparent;
+  transition: background-color 0.3s ease;
 }
+
+.theme-switch:hover {
+  background-color: #f1f1f1; /* Same hover effect as other nav items */
+}
+
+.sidebar.minimized .theme-switch {
+  justify-content: center; /* Center the icon and text */
+}
+
+.sidebar.minimized .theme-switch i,
+.sidebar.minimized .theme-switch span {
+  margin-right: 0; /* Remove the margin for icons and text */
+}
+
+.sidebar.minimized .theme-switch span {
+  display: none; /* Hide the text when sidebar is minimized */
+}
+
 
 .theme-switch button {
   background: none;
@@ -282,9 +296,6 @@ export default {
   cursor: pointer;
 }
 
-.sidebar.minimized .theme-switch {
-  position: static; /* Align it with minimized nav items */
-}
 
   @media (max-width: 768px) {
     .sidebar {

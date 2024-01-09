@@ -22,7 +22,6 @@ export default {
 
 
 <template>
-  <div class="modal-container">
     <div class="modal">
       <h2 class="form-heading">Register Form</h2>
       <form @submit.prevent="signup" class="form-layout">
@@ -46,26 +45,21 @@ export default {
         </button>
       </form>
     </div>
-  </div>
 </template>
 
 <style scoped>
-.modal-container {
+.modal {
   display: flex;
   flex-direction: column;
   justify-content: center; /* Center vertically */
   align-items: center; /* Center horizontally */
-  width: 100%; /* Allows the container to fill the width of its parent */
-  max-width: 600px; /* Maximum width of the modal */
+  width: 100%; /* Fill the width of the parent */
+  margin: auto; /* Center the modal in the available space */
   padding: 20px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box; /* Includes padding and border in size calculations */
   background: rgba(255, 255, 255, 0.95); /* Slightly transparent white */
   border-radius: 8px; /* Optional: rounded corners */
-  margin: auto; /* Centers the modal in the available space */
-}
-
-.modal {
-  width: 100%; /* Ensures that the modal width is the same as the container */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .form-heading {
