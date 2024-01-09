@@ -8,11 +8,13 @@ export default {
   components: {
     Sidebar
   },
+  
   setup() {
     const sidebarStore = useSidebarStore();
     const sidebarWidth = ref(sidebarStore.isMin ? 60 : 250);
 
     watch(() => sidebarStore.isMin, (newVal) => {
+      // Update the sidebarWidth value based on the new value of isMin
       sidebarWidth.value = newVal ? 60 : 250;
     });
 

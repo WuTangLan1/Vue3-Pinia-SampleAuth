@@ -73,7 +73,8 @@ export default {
     display: flex;
     flex-direction: column;
     justify-content: space-between; 
-    width: 200px;
+    transition: width 0.5s ease;
+    width: 250px; /* Your default width */
     background-color: rgb(251, 251, 252);
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
     overflow-y: auto;
@@ -82,7 +83,6 @@ export default {
     bottom: 0;
     left: 0;
     z-index: 1000;
-    transition: width 0.5s ease;
     overflow-x: hidden;
   }
 

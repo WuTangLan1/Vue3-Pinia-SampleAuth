@@ -64,6 +64,26 @@ export default {
   font-size: 24px;
   color: #333;
   margin-bottom: 20px; /* Spacing below the heading */
+  position: relative; /* Establish a positioning context for the pseudo-element */
+  padding-bottom: 5px; /* Space for the underline */
+}
+
+.form-heading::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%); /* Center the element */
+  width: 0;
+  height: 2px;
+  background-color: #2c3e50;
+  transition: width 0.3s ease;
+}
+
+.form-heading:hover::after {
+  width: 100%; /* Full width on hover */
+  left: 0; /* Align to the left */
+  transform: translateX(0%); /* Remove translation on hover */
 }
 
 .modal {
