@@ -162,21 +162,25 @@ export default {
   }
 
   .sidebar-toggle {
-    position: absolute;
-    top: 0;
-    right: 0;
-    z-index: 1100;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%; /* Full width of the sidebar */
-    height: 40px;
-    cursor: pointer;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    background-color: rgb(251, 251, 252);
-    box-shadow: -2px 2px 5px rgba(0, 0, 0, 0.1);
-    transition: width 0.5s ease;
-  }
+  position: absolute; /* Keeps the toggle button in a fixed position inside the sidebar */
+  top: 10px; /* Adjust as necessary to place it at the top of the sidebar */
+  right: 10px; /* Adjust as necessary to place it on the right of the sidebar */
+  z-index: 1100; /* Ensures it's above other elements */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px; /* Adjust the width as needed */
+  height: 30px; /* Adjust the height as needed */
+  cursor: pointer;
+  border: none; /* Optional: removes border */
+  background-color: transparent; /* Optional: makes the background transparent */
+  transition: transform 0.5s ease; /* Smooth transition for the icon rotation */
+}
+
+/* Rotates the arrow icon when the sidebar is minimized */
+.sidebar.minimized .sidebar-toggle i {
+  transform: rotate(180deg); /* Rotates the arrow icon 180 degrees */
+}
 
   .sidebar.minimized .sidebar-toggle {
     width: 60px; /* Width of the minimized sidebar */

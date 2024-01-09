@@ -4,18 +4,16 @@ import { useAuthStore } from '@/store/useAuthStore';
 export default {
   name: 'RegModal',
   setup() {
-    const { email, password, name, dob, signup } = useAuthStore();
+    const store = useAuthStore();
 
     return {
-      email,
-      password,
-      name,
-      dob,
-      signup
+      ...store, // This will spread all reactive properties including `loading` if it's defined in the store
+      signup: store.signup
     };
   }
 };
 </script>
+
 
 <template>
   <div class="modal-container">
@@ -66,24 +64,24 @@ export default {
   margin-bottom: 20px; /* Spacing below the heading */
   position: relative; /* Establish a positioning context for the pseudo-element */
   padding-bottom: 5px; /* Space for the underline */
+  text-align: center; /* Center the text */
 }
 
 .form-heading::after {
   content: '';
   position: absolute;
-  left: 50%;
+  left: 0;
+  right: 0;
   bottom: 0;
-  transform: translateX(-50%); /* Center the element */
-  width: 0;
-  height: 2px;
+  height: 4px; /* Make the underline thicker */
   background-color: #2c3e50;
-  transition: width 0.3s ease;
+  transition: all 0.3s ease;
+  transform: scaleX(0); /* Start with no width */
+  transform-origin: center; /* Grow from the center */
 }
 
 .form-heading:hover::after {
-  width: 100%; /* Full width on hover */
-  left: 0; /* Align to the left */
-  transform: translateX(0%); /* Remove translation on hover */
+  transform: scaleX(1); /* Grow to full width on hover */
 }
 
 .modal {

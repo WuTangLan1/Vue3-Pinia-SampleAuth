@@ -4,7 +4,8 @@ import { defineStore } from "pinia";
 export const useSidebarStore = defineStore({
   id: 'storeSidebar',
   state: () => ({
-    isMin: true
+    isMin: true,
+    loading: false,
   }),
   actions: {
     toggle() {

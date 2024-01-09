@@ -14,7 +14,6 @@ export default {
     const sidebarWidth = ref(sidebarStore.isMin ? 60 : 250);
 
     watch(() => sidebarStore.isMin, (newVal) => {
-      // Update the sidebarWidth value based on the new value of isMin
       sidebarWidth.value = newVal ? 60 : 250;
     });
 
@@ -31,14 +30,14 @@ export default {
 <template>
   <div id="app">
     <Sidebar @toggleSidebar="toggleSidebar" />
-    <!-- Bind a class to dynamically adjust the styling -->
-    <div class="main-content" :class="{ 'is-minimized': sidebarWidth === 60 }" :style="{ marginLeft: sidebarWidth + 'px' }">
+    <div class="main-content" :style="{ marginLeft: sidebarWidth + 'px' }">
       <router-view/>
     </div>
   </div>
 </template>
 
 
+/* App.vue */
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -47,26 +46,18 @@ export default {
   text-align: center;
   color: #2c3e50;
   display: flex;
-  height: 100vh; /* Add this to ensure the app container takes full viewport height */
+  height: 100vh; /* Full viewport height */
 }
 
 .main-content {
-  flex-grow: 1; /* Take available space */
-  transition: margin-left 0.5s ease;
+  flex-grow: 1;
   display: flex;
-  justify-content: center; /* Center content horizontally */
-  align-items: center; /* Center content vertically */
+  width: 100%;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  transition: margin-left 0.5s ease;
+  padding: 20px; /* Add padding if needed */
 }
 
-/* Styles when the sidebar is minimized */
-.is-minimized {
-  margin-left: 60px; /* Adjust based on the minimized width of the sidebar */
-}
-
-@media (max-width: 768px) {
-  .main-content {
-    margin-left: 60px; /* Adjust based on the collapsed width of the sidebar */
-  }
-}
 </style>
 
