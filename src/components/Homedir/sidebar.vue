@@ -1,26 +1,30 @@
 <script>
-import { ref } from 'vue';
+import { computed } from 'vue';
+import { useSidebarStore } from '@/store/useSidebarStore'; // Make sure the path is correct
 
 export default {
   name: 'Sidebar-View',
-  setup(_, { emit }) {
-    const isMinimized = ref(true);
+  setup() {
+    const sidebarStore = useSidebarStore();
+
+    const isMinimized = computed(() => sidebarStore.isMin); // reactive computed property
 
     const toggleSidebar = () => {
-      isMinimized.value = !isMinimized.value;
-      emit('toggleSidebar', isMinimized.value ? 60 : 250); // Toggle width
+      sidebarStore.toggle();
     };
 
     return {
-      isMinimized,
+      isMinimized, // use the computed property here
       toggleSidebar,
     };
   }
 }
 </script>
 
+
+
 <template>
-    <aside class="sidebar" :class="{ minimized: isMinimized }">
+  <aside class="sidebar" :class="{ minimized: isMinimized }">
        <div class="sidebar-toggle" @click="toggleSidebar">
            <i class="fas" :class="{ 'fa-arrow-left': !isMinimized, 'fa-arrow-right': isMinimized }"></i>
        </div>
@@ -28,7 +32,7 @@ export default {
         <ul class="nav-items">
           <!-- Home Link -->
             <li class="nav-item">
-                <router-link to="/home" class="nav-link">
+                <router-link to="/" class="nav-link">
                 <i class="fas fa-home"></i>
                 <span>Home</span>
                 </router-link>
@@ -57,7 +61,8 @@ export default {
         </ul>
       </nav>
       <div class="profile-container">
-        <h3 class="profile-title">Profile</h3>
+        <i class="fas fa-user-circle profile-icon"></i> 
+        <span class="profile-title">Profile</span>
       </div>
     </aside>
   </template>
@@ -109,17 +114,37 @@ export default {
   .fa-arrow-right {
     color: #290a07; /* Red, for example */
   }
-
-
   .sidebar.minimized {
-    width: 60px;
-  }
+  width: 60px; /* Or whatever your minimized width is */
+}
+
+/* You might need a class for the maximized state if the transition doesn't work */
+.sidebar.maximized {
+  width: 250px; /* Or whatever your maximized width is */
+}
   
   .profile-container {
-    border-top: 1px solid #ccc; /* Border at the top */
-    padding: 15px; /* Padding inside the container */
-    text-align: center; /* Center align the text */
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    border-top: 1px solid #ccc;
+    padding: 15px;
+    text-align: center;
   }
+
+  .profile-icon {
+    margin-right: 10px; /* Space between icon and text */
+    color: #333; /* Icon color */
+  }
+
+  .sidebar.minimized .profile-title {
+    display: none; /* Hide title when sidebar is minimized */
+  }
+
+  .sidebar.minimized .profile-container {
+    justify-content: center; /* Center the icon when minimized */
+  }
+
 
   .profile-title {
     margin-top: 0; /* Remove top margin */

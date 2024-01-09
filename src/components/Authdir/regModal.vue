@@ -1,3 +1,22 @@
+<script>
+import { useAuthStore } from '@/store/useAuthStore';
+
+export default {
+  name: 'RegModal',
+  setup() {
+    const { email, password, name, dob, signup } = useAuthStore();
+
+    return {
+      email,
+      password,
+      name,
+      dob,
+      signup
+    };
+  }
+};
+</script>
+
 <template>
   <div class="modal-container">
     <div class="modal">
@@ -26,95 +45,85 @@
   </div>
 </template>
 
-<script>
-import { useAuthStore } from '@/store/useAuthStore';
-
-export default {
-  name: 'RegModal',
-  setup() {
-    const { email, password, name, dob, signup } = useAuthStore();
-
-    return {
-      email,
-      password,
-      name,
-      dob,
-      signup
-    };
-  }
-};
-</script>
-
 <style scoped>
 .modal-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  padding: 40px; /* Provides spacing around the modal */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   width: 100%;
-  max-width: 600px; /* Adjust the maximum width as needed */
-  margin: auto; /* Center the modal in the available space */
-  position: relative; /* Ensure it's positioned relative to its container */
+  max-width: 600px; /* Maximum width of the modal */
+  margin: auto; /* Centers the modal horizontally */
+  position: relative;
   z-index: 2;
-  padding: 20px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
 
 .form-heading {
   font-size: 24px;
   color: #333;
-  margin-bottom: 20px;
+  margin-bottom: 20px; /* Spacing below the heading */
 }
 
 .modal {
   background: white;
-  padding: 20px;
-  border-radius: 0; /* Removing rounded corners */
-  width: 100%;
+  padding: 20px; /* Padding inside the modal */
+  border-radius: 8px; /* Rounded corners of the modal */
+  box-sizing: border-box; /* Includes padding in the width calculation */
+  width: 100%; /* Makes the modal responsive */
+  max-width: 600px; /* Maximum width of the modal content */
 }
 
 .form-layout {
   display: flex;
+  flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-between;
-  gap: 20px;
+  gap: 20px; /* Space between the input columns */
 }
 
 .input-group {
   display: flex;
   flex-direction: column;
-  flex-basis: 45%; /* Adjust the width of each column */
+  width: calc(50% - 10px); /* Adjust the width of each column, accounting for the gap */
+  box-sizing: border-box; /* Includes padding and border in the width calculation */
 }
 
 .label {
   display: block;
-  margin-bottom: 5px;
+  margin-bottom: 5px; /* Spacing below each label */
 }
 
-input[type="email"], input[type="password"], input[type="text"], input[type="date"] {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 20px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
+input[type="email"],
+input[type="password"],
+input[type="text"],
+input[type="date"] {
+  width: 100%; /* Makes input take the full width of its container */
+  padding: 10px; /* Padding inside the input */
+  margin-bottom: 20px; /* Spacing below each input */
+  border: 1px solid #ddd; /* Border style for the input */
+  border-radius: 4px; /* Rounded corners for the input */
+  box-sizing: border-box; /* Includes padding and border in the width calculation */
 }
 
 button {
-  width: 100%;
-  padding: 10px;
+  width: 100%; /* Makes button take the full width of its container */
+  padding: 10px; /* Padding inside the button */
   border: none;
   background-color: blue;
   color: white;
-  border-radius: 4px;
-  cursor: pointer;
+  border-radius: 4px; /* Rounded corners for the button */
+  cursor: pointer; /* Changes cursor to pointer on hover */
+  margin-top: 10px; /* Adds space above the button */
 }
 
 button:disabled {
-  background-color: grey;
+  background-color: grey; /* Grey color for disabled state */
 }
 
 button:hover {
-  background-color: darkblue; /* Darker shade when hovered */
+  background-color: darkblue; /* Darker blue on hover */
 }
 
 .loader {
@@ -138,7 +147,11 @@ button:hover {
   }
 
   .input-group {
-    flex-basis: 100%;
+    width: 100%; /* Full width for smaller screens */
+  }
+
+  .modal-container {
+    padding: 20px; /* Reduced padding on smaller screens */
   }
 }
 </style>
