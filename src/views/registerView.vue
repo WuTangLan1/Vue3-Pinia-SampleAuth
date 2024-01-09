@@ -1,8 +1,8 @@
 <script>
 import p1 from '@/assets/p1.png';
-import p2 from '@/assets/p2.png';
 import p3 from '@/assets/p3.png';
-import p4 from '@/assets/p4.png';
+import p5 from '@/assets/p5.png';
+import p7 from '@/assets/p7.png';
 import RegModal from '@/components/Authdir/RegModal.vue';
 
 export default {
@@ -12,7 +12,7 @@ export default {
   },
   data() {
     return {
-      images: { p1, p2, p3, p4 },
+      images: { p1, p3, p5, p7 },
     };
   },
 };
@@ -21,90 +21,111 @@ export default {
 
 <template>
   <div class="register-view-container">
+    <!-- Overlay for dimming the background -->
+    <div class="dim-overlay"></div>
+
+    <!-- Background images container -->
     <div class="background-container">
       <div class="background-image top-left" :style="{ backgroundImage: 'url(' + images.p1 + ')' }"></div>
-      <div class="background-image top-right" :style="{ backgroundImage: 'url(' + images.p2 + ')' }"></div>
-      <div class="background-image bottom-left" :style="{ backgroundImage: 'url(' + images.p3 + ')' }"></div>
-      <div class="background-image bottom-right" :style="{ backgroundImage: 'url(' + images.p4 + ')' }"></div>
+      <div class="background-image top-right" :style="{ backgroundImage: 'url(' + images.p3 + ')' }"></div>
+      <div class="background-image bottom-left" :style="{ backgroundImage: 'url(' + images.p5 + ')' }"></div>
+      <div class="background-image bottom-right" :style="{ backgroundImage: 'url(' + images.p7 + ')' }"></div>
     </div>
+
+    <!-- Modal container for the registration form -->
     <div class="modal-container">
       <RegModal />
     </div>
   </div>
 </template>
   
-  <style scoped>
-.modal-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+<style scoped>
+.register-view-container {
   position: relative;
   width: 100%;
-  max-width: 600px;
-  margin: auto; /* This will center the modal-container if it's not full width */
-  padding: 20px;
-  box-sizing: border-box;
-  background: rgba(255, 255, 255, 0.95);
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
 }
-  
-  .background-container {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-  }
-  
+
+.dim-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5); /* Semi-transparent black overlay */
+  z-index: 1;
+}
+
+.background-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+}
+
+.background-image {
+  position: absolute;
+  background-size: cover;
+  background-position: center;
+}
+
+.top-left {
+  top: 5%;
+  left: 5%;
+  width: 25%;
+  height: 25%;
+}
+
+.top-right {
+  top: 5%;
+  right: 5%;
+  width: 25%;
+  height: 25%;
+}
+
+.bottom-left {
+  bottom: 5%;
+  left: 5%;
+  width: 25%;
+  height: 25%;
+}
+
+.bottom-right {
+  bottom: 5%;
+  right: 5%;
+  width: 25%;
+  height: 25%;
+}
+
+.modal-container {
+  position: relative;
+  z-index: 3;
+  background: #fff;
+  padding: 2em;
+  border-radius: 10px;
+  box-shadow: 0px 8px 36px rgba(0, 0, 0, 0.1);
+  max-width: 500px;
+  width: 100%;
+  z-index: 4;
+  /* Additional styling to ensure the modal is centered */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
   .background-image {
-    background-size: cover;
-    background-position: center;
-    transition: opacity 0.5s ease;
-    filter: blur(2px); /* Adds a subtle blur effect to the background images */
+    display: none;
   }
-  
-  /* Assign each background image to its grid area */
-  .top-left {
-    grid-area: 1 / 1 / 2 / 2;
-  }
-  
-  .top-right {
-    grid-area: 1 / 2 / 2 / 3;
-  }
-  
-  .bottom-left {
-    grid-area: 2 / 1 / 3 / 2;
-  }
-  
-  .bottom-right {
-    grid-area: 2 / 2 / 3 / 3;
-  }
-  
   .modal-container {
-    position: relative;
-    z-index: 10; /* Higher z-index to ensure it's above the background images */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    max-width: 600px; /* Adjust the maximum width as needed */
-    margin: auto; /* Center the modal in the available space */
-    padding: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    background: rgba(255, 255, 255, 0.95); /* Slightly transparent white */
-    border-radius: 8px; /* Optional: rounded corners */
+    padding: 1em;
   }
-  
-  /* Ensure the modal content is centered within the .modal-container */
-  .modal-container .modal {
-    margin: auto;
-  }
-  
-  /* Add any additional styles for the modal content here */
-  </style>
-  
+}
+</style>

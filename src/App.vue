@@ -11,10 +11,10 @@ export default {
   setup() {
     const sidebarStore = useSidebarStore();
     // This will hold the current width of the sidebar
-    const sidebarWidth = ref(sidebarStore.isMin ? '60px' : '200px');
+    const sidebarWidth = ref(sidebarStore.isMin ? '60px' : '150px');
 
     watch(() => sidebarStore.isMin, (isMinimized) => {
-      sidebarWidth.value = isMinimized ? '60px' : '200px';
+      sidebarWidth.value = isMinimized ? '60px' : '150px';
     });
 
     watch(() => sidebarStore.isDarkMode, (isDarkMode) => {

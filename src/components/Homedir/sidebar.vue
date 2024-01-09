@@ -58,17 +58,17 @@ export default {
               <span>Info</span>
             </router-link>
           </li>
-          <li class="nav-item theme-switch" @click="toggleDarkMode">
+        </ul>
+    </nav>
+    <li class="nav-item theme-switch" @click="toggleDarkMode">
             <i :class="['fas', isDarkMode ? 'fa-sun' : 'fa-moon']"></i>
             <span>{{ isDarkMode ? 'Light Mode' : 'Dark Mode' }}</span>
           </li>
-        </ul>
       <!-- Profile Section -->
       <div class="profile-container" v-show="!isMinimized">
         <i class="fas fa-user-circle profile-icon"></i>
         <span class="profile-title">Profile</span>
       </div>
-    </nav>
   </aside>
 </template>
   
@@ -262,33 +262,36 @@ export default {
   }
 
   .theme-switch {
-  display: flex;
-  align-items: center;
-  padding: 15px;
-  width: 100%;
-  text-align: left; /* Align text to the left */
-  color: inherit;
-  background-color: transparent;
-  transition: background-color 0.3s ease;
-}
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 15px;
+    width: 100%;
+    text-align: left;
+    color: var(--text-color);
+    background-color: transparent;
+    border-top: 1px solid var(--border-color); /* Optional: adds a separator */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
 
-.theme-switch:hover {
-  background-color: #f1f1f1; /* Same hover effect as other nav items */
-}
+  .theme-switch:hover {
+    background-color: var(--primary-color);
+  }
 
-.sidebar.minimized .theme-switch {
-  justify-content: center; /* Center the icon and text */
-}
+  .theme-switch i {
+    margin-right: 10px; /* Space between icon and text */
+  }
 
-.sidebar.minimized .theme-switch i,
-.sidebar.minimized .theme-switch span {
-  margin-right: 0; /* Remove the margin for icons and text */
-}
+  /* Adjustments for minimized sidebar */
+  .sidebar.minimized .theme-switch {
+    justify-content: center; /* Center the icon and text */
+    padding: 10px;
+  }
 
-.sidebar.minimized .theme-switch span {
-  display: none; /* Hide the text when sidebar is minimized */
-}
-
+  .sidebar.minimized .theme-switch span {
+    display: none; /* Hide the text when sidebar is minimized */
+  }
 
 .theme-switch button {
   background: none;
