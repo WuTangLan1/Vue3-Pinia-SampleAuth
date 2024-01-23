@@ -60,15 +60,6 @@ export default {
           </li>
         </ul>
     </nav>
-    <li class="nav-item theme-switch" @click="toggleDarkMode">
-            <i :class="['fas', isDarkMode ? 'fa-sun' : 'fa-moon']"></i>
-            <span>{{ isDarkMode ? 'Light Mode' : 'Dark Mode' }}</span>
-          </li>
-      <!-- Profile Section -->
-      <div class="profile-container" v-show="!isMinimized">
-        <i class="fas fa-user-circle profile-icon"></i>
-        <span class="profile-title">Profile</span>
-      </div>
   </aside>
 </template>
   
@@ -79,7 +70,7 @@ export default {
     flex-direction: column;
     justify-content: space-between; 
     transition: width 0.5s ease;
-    width: 250px; /* Your default width */
+    width: 100px; /* Your default width */
     background-color: rgb(251, 251, 252);
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
     overflow-y: auto;
@@ -125,7 +116,7 @@ export default {
 
 /* You might need a class for the maximized state if the transition doesn't work */
 .sidebar.maximized {
-  width: 250px; /* Or whatever your maximized width is */
+  width: 100px; /* Or whatever your maximized width is */
 }
   
   .profile-container {
@@ -216,7 +207,7 @@ export default {
     margin-bottom: 10px; /* Increase bottom margin for spacing */
   }
 
-  .nav-item.theme-switch {
+  .nav-item{
   display: flex;
   align-items: center;
   padding: 15px;
@@ -260,44 +251,6 @@ export default {
   .sidebar.minimized .nav-link span {
     display: none; /* Hide text when minimized */
   }
-
-  .theme-switch {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    padding: 15px;
-    width: 100%;
-    text-align: left;
-    color: var(--text-color);
-    background-color: transparent;
-    border-top: 1px solid var(--border-color); /* Optional: adds a separator */
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-
-  .theme-switch:hover {
-    background-color: var(--primary-color);
-  }
-
-  .theme-switch i {
-    margin-right: 10px; /* Space between icon and text */
-  }
-
-  /* Adjustments for minimized sidebar */
-  .sidebar.minimized .theme-switch {
-    justify-content: center; /* Center the icon and text */
-    padding: 10px;
-  }
-
-  .sidebar.minimized .theme-switch span {
-    display: none; /* Hide the text when sidebar is minimized */
-  }
-
-.theme-switch button {
-  background: none;
-  border: none;
-  cursor: pointer;
-}
 
 
   @media (max-width: 768px) {
