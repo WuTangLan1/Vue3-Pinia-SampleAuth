@@ -142,11 +142,6 @@ export default {
   }
 
 
-  .profile-title {
-    margin-top: 0; /* Remove top margin */
-    color: #333; /* Text color */
-    font-size: 1.2em; /* Font size */
-  }
   .sidebar-nav {
     display: flex;
     flex-direction: column;
@@ -198,13 +193,8 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center; /* Align items horizontally */
-  }
-
-  .nav-item {
-    margin-left: -15px;
-    width: 100%; /* Full width for each nav item */
-    text-align: center; /* Center text */
-    margin-bottom: 10px; /* Increase bottom margin for spacing */
+    justify-content: center; /* Center the items vertically */
+    height: 100%; /* Fill the entire height of the sidebar */
   }
 
   .nav-item{
@@ -217,18 +207,23 @@ export default {
   width: 100%;
   text-align: left; /* Align text to the left */
   cursor: pointer; 
+  margin-left: -15px;
+  width: 100%; /* Full width for each nav item */
+  text-align: center; /* Center text */
+  margin-bottom: 10px;
 }
 
-  .nav-link {
+.nav-link {
     display: flex;
     align-items: center;
-    justify-content: flex;
+    justify-content: center; /* Center content horizontally */
     width: 100%;
     padding: 15px;
     color: #333;
     text-decoration: none;
     transition: background-color 0.3s ease;
   }
+
 
   .nav-link i {
     margin-right: 10px; /* Space between icon and text */
@@ -238,8 +233,7 @@ export default {
     background-color: #f1f1f1;
   }
 
- /* Styles for minimized sidebar */
- .sidebar.minimized .nav-link {
+  .sidebar.minimized .nav-link {
     justify-content: center; /* Center content */
     padding: 10px;
   }

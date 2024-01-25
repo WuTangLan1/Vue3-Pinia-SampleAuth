@@ -17,38 +17,39 @@ export const useAuthStore = defineStore({
     actions: {
         async signup() {
             try {
+                this.loading = true; 
                 console.log(this.email, this.password)
                 const userCredential = await createUserWithEmailAndPassword(auth, this.email, this.password);
                 const user = userCredential.user;
                 console.log
                 
                 if (user) {
-                    // Create a document in Firestore with the same user ID
                     const userProfile = doc(db, "profiles", user.uid);
                     await setDoc(userProfile, {
                         full_name: this.name,
-                        dob: this.dob // Make sure dob is in the correct format or use a Timestamp
+                        dob: this.dob 
                     });
 
                     router.replace({ name: 'home' });
                 }
             } catch (error) {
                 console.error("Error signing up: ", error);
+            } finally {
+                this.loading = false; // Set loading to false regardless of success or failure
             }
+            
         },
 
         async login() {
             try {
+                this.loading = true; 
                 const res = await signInWithEmailAndPassword(auth, this.email, this.password);
                 if (res) {
                     const user = res.user;
-
-                    // Fetch user profile from Firestore
                     const userProfileRef = doc(db, "profiles", user.uid);
                     const userProfileSnap = await getDoc(userProfileRef);
 
                     if (userProfileSnap.exists()) {
-                        // Update state with user info
                         const userData = userProfileSnap.data();
                         this.uid = user.uid;
                         this.name = userData.full_name;
@@ -60,6 +61,8 @@ export const useAuthStore = defineStore({
                 }
             } catch (error) {
                 console.error("Error logging in: ", error);
+            } finally {
+                this.loading = false; // Set loading to false regardless of success or failure
             }
         },
 
