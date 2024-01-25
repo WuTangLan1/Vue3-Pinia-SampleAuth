@@ -11,10 +11,10 @@ export default {
   setup() {
     const sidebarStore = useSidebarStore();
     // This will hold the current width of the sidebar
-    const sidebarWidth = ref(sidebarStore.isMin ? '60px' : '300px');
+    const sidebarWidth = ref(sidebarStore.isMin ? '60px' : '150px');
 
     watch(() => sidebarStore.isMin, (isMinimized) => {
-      sidebarWidth.value = isMinimized ? '60px' : '300px';
+      sidebarWidth.value = isMinimized ? '60px' : '150px';
     });
 
     watch(() => sidebarStore.isDarkMode, (isDarkMode) => {
@@ -48,5 +48,6 @@ export default {
   flex-grow: 1;
   transition: margin-left 0.5s; /* Smooth transition for the margin */
   overflow: hidden;
+  background: rgb(255, 162, 243);
 }
 </style>

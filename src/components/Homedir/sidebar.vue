@@ -65,22 +65,22 @@ export default {
   
   
   <style scoped>
-  .sidebar {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between; 
-    transition: width 0.5s ease;
-    width: 100px; /* Your default width */
-    background-color: rgb(251, 251, 252);
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
-    overflow-y: auto;
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 1000;
-    overflow-x: hidden;
-  }
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; 
+  transition: width 0.5s ease; /* Remove this line */
+  /* width: 100px; Remove this line */
+  background-color: rgb(251, 251, 252);
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+  overflow-y: auto;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1000;
+  overflow-x: hidden;
+}
 
   .nav-link i {
     margin-right: 10px; /* Space between icon and text */
@@ -154,19 +154,19 @@ export default {
   }
 
   .sidebar-toggle {
-  position: absolute; /* Keeps the toggle button in a fixed position inside the sidebar */
-  top: 10px; /* Position the toggle at the top of the sidebar */
-  right: 10px; /* Position the toggle at the right of the sidebar */
-  z-index: 1100; /* Ensures it's above other elements */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 30px; /* Set the width of the toggle area */
-  height: 30px; /* Set the height of the toggle area */
-  cursor: pointer;
-  background-color: transparent; /* No background */
-  border: none; /* No border */
-}
+    position: absolute; /* Keeps the toggle button in a fixed position inside the sidebar */
+    top: 10px; /* Position the toggle at the top of the sidebar */
+    right: 10px; /* Position the toggle at the right of the sidebar */
+    z-index: 1100; /* Ensures it's above other elements */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px; /* Set the width of the toggle area */
+    height: 30px; /* Set the height of the toggle area */
+    cursor: pointer;
+    background-color: transparent; /* No background */
+    border: none; /* No border */
+  }
 
 .sidebar-toggle i {
   transition: transform 0.5s ease; /* Smooth transition for the icon rotation */
@@ -182,11 +182,12 @@ export default {
   transform: rotate(360deg); /* Arrow points from right to left when maximized */
 }
 
-  .sidebar.minimized .sidebar-toggle {
+.sidebar.minimized .sidebar-toggle {
     width: 60px; /* Width of the minimized sidebar */
     right: 0; /* Align to the right for minimized sidebar */
+    left: 10px; /* Center the arrow horizontally */
+    margin: auto; /* Center the arrow horizontally */
   }
-
   .nav-items {
     list-style: none;
     padding: 0;
@@ -197,21 +198,18 @@ export default {
     height: 100%; /* Fill the entire height of the sidebar */
   }
 
-  .nav-item{
-  display: flex;
-  align-items: center;
-  padding: 15px;
-  color: inherit; /* Use current text color */
-  background-color: transparent; /* No background */
-  border: none; /* No border */
-  width: 100%;
-  text-align: left; /* Align text to the left */
-  cursor: pointer; 
-  margin-left: -15px;
-  width: 100%; /* Full width for each nav item */
-  text-align: center; /* Center text */
-  margin-bottom: 10px;
-}
+  .nav-item {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Center content horizontally */
+    padding: 15px;
+    color: inherit; /* Use current text color */
+    background-color: transparent; /* No background */
+    border: none; /* No border */
+    width: 100%;
+    text-align: center; /* Center text */
+    margin-bottom: 10px; /* Increase bottom margin for spacing */
+  }
 
 .nav-link {
     display: flex;
@@ -242,8 +240,14 @@ export default {
     margin-right: 0; /* Remove margin when minimized */
   }
 
+  .nav-link span {
+    opacity: 1;
+    transition: opacity 0.5s ease; /* Add a fade transition for opacity */
+  }
+
   .sidebar.minimized .nav-link span {
     display: none; /* Hide text when minimized */
+    opacity: 0;
   }
 
 

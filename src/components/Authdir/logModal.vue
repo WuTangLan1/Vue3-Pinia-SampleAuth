@@ -2,6 +2,7 @@
 import { ref } from 'vue';
 import { useAuthStore } from '@/store/useAuthStore';
 
+
 export default {
   setup() {
     const email = ref('');
@@ -17,7 +18,8 @@ export default {
     return {
       email,
       password,
-      login
+      login,
+      authStore
     };
   }
 };
@@ -57,6 +59,7 @@ export default {
   background: rgba(255, 255, 255, 0.95);
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  max-width: 600px
 }
 
 .form-heading {

@@ -4,10 +4,8 @@ import { useAuthStore } from '@/store/useAuthStore';
 export default {
   name: 'RegModal',
   setup() {
-    // Use the store directly in the template
     const authStore = useAuthStore();
     
-    // Now, authStore is reactive and can be used directly in the template with v-model
     return {
       authStore, // only return the store
     };
