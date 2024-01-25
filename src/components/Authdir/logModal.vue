@@ -1,13 +1,27 @@
 <script>
 import { ref } from 'vue';
 import { useAuthStore } from '@/store/useAuthStore';
+import ForgotPasswordModal from '@/components/Authdir/ForgotPasswordModal.vue'; // Add this import
 
 
 export default {
+  components : {
+      ForgotPasswordModal
+  },
   setup() {
     const email = ref('');
     const password = ref('');
     const authStore = useAuthStore();
+    const showForgotPasswordModal = ref(false);
+
+    const openForgotPasswordModal = () => {
+      showForgotPasswordModal.value = true;
+    };
+
+    const closeForgotPasswordModal = () => {
+      showForgotPasswordModal.value = false;
+    };
+
 
     const login = async () => {
       authStore.email = email.value;
@@ -19,7 +33,10 @@ export default {
       email,
       password,
       login,
-      authStore
+      authStore,
+      showForgotPasswordModal,
+      openForgotPasswordModal,
+      closeForgotPasswordModal,
     };
   }
 };
@@ -37,10 +54,13 @@ export default {
         <label for="password">Password</label>
         <input type="password" id="password" v-model="password" required>
       </div>
-      <button type="submit">
-        Login
-        <span v-if="authStore.loading" class="loader"></span>
-      </button>
+     
+      <div class="button-group">
+        <button type="submit" class="login-button">Login<span v-if="authStore.loading" class="loader"></span></button>
+        <button type="button" @click="openForgotPasswordModal" class="forgot-password-button">Forgot Password</button>
+      </div>
+
+      <ForgotPasswordModal v-if="showForgotPasswordModal" />
     </form>
   </div>
 </template>
@@ -76,51 +96,58 @@ export default {
   flex-direction: column;
   justify-content: space-between;
   gap: 20px;
+  width: 400px;
 }
 
-.input-group {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  box-sizing: border-box;
-}
+
 
 label {
   display: block;
   margin-bottom: 5px;
+  text-align: center;
+}
+
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  width: 100%; /* Take up full width */
+  box-sizing: border-box;
 }
 
 input[type="email"],
-input[type="password"],
-input[type="text"],
-input[type="date"] {
-  width: 100%;
-  padding: 10px;
+input[type="password"] {
+  width: 100%; /* Take up full width */
+  padding: 12px; /* Increased padding for better visibility and aesthetics */
   margin-bottom: 20px;
-  border: 1px solid #ddd;
+  border: 1px solid var(--border-color);
   border-radius: 4px;
   box-sizing: border-box;
+}
+
+.button-group {
+  display: flex;
+  gap: 10px; /* Adjust the gap between buttons */
 }
 
 button {
   width: 100%;
   padding: 10px;
   border: none;
-  background-color: blue;
-  color: white;
   border-radius: 4px;
   cursor: pointer;
   margin-top: 10px;
 }
 
-button:disabled {
-  background-color: grey;
+.login-button {
+  background: linear-gradient(135deg, #4CAF50, #2E7D32); /* Green gradient */
+  color: white;
 }
 
-button:hover {
-  background-color: darkblue;
+.forgot-password-button {
+  background: linear-gradient(135deg, #2196F3, #1565C0); /* Blue gradient */
+  color: white;
 }
-
 .loader {
   border: 2px solid #f3f3f3;
   border-radius: 50%;

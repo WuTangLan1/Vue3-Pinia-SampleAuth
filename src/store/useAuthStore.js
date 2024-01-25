@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 import router from '@/router/index.js';
 import { auth, db } from '@/components/Firebase/fbInit.js';
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, sendPasswordResetEmail } from "firebase/auth";
 import { getDoc } from "firebase/firestore";
 import { doc, setDoc } from 'firebase/firestore'; // Import setDoc and doc
 
@@ -71,6 +71,15 @@ export const useAuthStore = defineStore({
             router.replace({name: 'login'})
             this.resetInp();
         },
+        async resetPassword(email) {
+            try {
+              await sendPasswordResetEmail(auth, email);
+              // Optionally handle success, display a success message, etc.
+            } catch (error) {
+              console.error('Error sending password reset email:', error);
+              throw error;
+            }
+          },
           
           resetInp() {
             this.email = '',
