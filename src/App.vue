@@ -48,6 +48,6 @@ export default {
   flex-grow: 1;
   transition: margin-left 0.5s; /* Smooth transition for the margin */
   overflow: hidden;
-  background: rgb(255, 162, 243);
+  background: rgb(255, 186, 246);
 }
 </style>

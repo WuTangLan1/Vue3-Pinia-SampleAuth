@@ -1,7 +1,7 @@
 <template>
     <section class="info-section">
-      <h1>Welcome to Our Gaming World!</h1>
-      <p>
+      <h1 class="section-heading">Welcome to Our Gaming World!</h1>
+      <p class="section-description">
         Explore the latest and greatest in the gaming universe right here at our website. We're passionate about gaming and committed to providing you with the best experience. Dive into the excitement and discover what makes our gaming platform unique.
       </p>
   
@@ -21,31 +21,30 @@
           <p>Enjoy exclusive content and early access to upcoming releases. As a member of our gaming community, you'll get special perks and privileges.</p>
         </div>
       </div>
+
   
-      <div class="cta-container">
-        <p>Ready to embark on your gaming journey?</p>
-        <button class="cta-button">Join Now</button>
-      </div>
+      <div class="divider"></div>
     </section>
   </template>
   
   <style scoped>
   /* Add styling specific to the info section */
   .info-section {
-    background-color: var(--background);
+    background: linear-gradient(to right, #fdadf9, #f147e9); /* Gradient background */
     color: var(--text-color);
     padding: 2rem;
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* Subtle box shadow */
     margin-top: 2rem;
+    text-align: center;
   }
   
-  .info-section h1 {
-    font-size: 2rem;
+  .section-heading {
+    font-size: 2.5rem;
     margin-bottom: 1rem;
   }
   
-  .info-section p {
+  .section-description {
     font-size: 1.2rem;
     line-height: 1.6;
     margin-bottom: 1.5rem;
@@ -55,11 +54,15 @@
     display: flex;
     justify-content: space-between;
     gap: 1.5rem;
+    margin-top: 2rem;
   }
   
   .highlight-item {
     flex: 1;
     transition: transform 0.3s ease-in-out;
+    border-radius: 8px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2); /* Subtle box shadow */
+    padding: 1.5rem;
   }
   
   .highlight-item:hover {
@@ -75,7 +78,7 @@
   }
   
   .highlight3 {
-    background-color: #ffd700; /* Gold */
+    background-color: #f1d950; /* Gold */
   }
   
   .cta-container {
@@ -83,19 +86,11 @@
     margin-top: 2rem;
   }
   
-  .cta-button {
-    background-color: var(--primary-color);
-    color: var(--text-color);
-    padding: 1rem 2rem;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 1.2rem;
-    transition: background-color 0.3s;
-  }
   
-  .cta-button:hover {
-    background-color: darken(var(--primary-color), 10%);
+  .divider {
+    height: 2px;
+    background-color: rgba(255, 255, 255, 0.7); /* White with opacity */
+    margin: 2rem 0;
   }
   </style>
   
