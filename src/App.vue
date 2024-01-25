@@ -29,7 +29,6 @@ export default {
 <template>
   <div id="app" class="app-container">
     <Sidebar />
-    <!-- Apply the sidebarWidth as a left margin to the main content -->
     <div class="main-content" :style="{ 'margin-left': sidebarWidth }">
       <router-view />
     </div>
@@ -41,13 +40,18 @@ export default {
 
 .app-container {
   display: flex;
-  height: 100vh;
+  flex-direction: column; /* Ensures children are stacked vertically */
+  height: 98.5vh; /* Full viewport height */
 }
 
 .main-content {
-  flex-grow: 1;
-  transition: margin-left 0.5s; /* Smooth transition for the margin */
+  flex-grow: 1; /* Takes up all available space */
+  transition: margin-left 0.5s;
   overflow: hidden;
   background: rgb(255, 186, 246);
+}
+
+*, *:before, *:after {
+  box-sizing: border-box; /* Ensures padding and borders are included in the total width and height */
 }
 </style>
