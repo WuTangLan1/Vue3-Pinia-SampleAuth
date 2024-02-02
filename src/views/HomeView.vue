@@ -1,8 +1,15 @@
-<script>
-
-</script>
-
 <template>
-
-    <h1>Homepage</h1>
-</template>
+    <div>
+      <SampleContainer />
+    </div>
+  </template>
+  
+  <script>
+  import SampleContainer from '@/components/Homedir/SampleContainer.vue';
+  
+  export default {
+    components: {
+      SampleContainer,
+    },
+  }
+  </script>

@@ -1,132 +1,145 @@
 <script>
 import { useAuthStore } from '@/store/useAuthStore';
+import {ref} from 'vue';
 
 export default {
   name: 'RegModal',
   setup() {
     const authStore = useAuthStore();
+
+    const dob = ref('2001-03-03'); 
     
     return {
-      authStore, // only return the store
+      authStore,
+      dob // only return the store
     };
   }
 };
 </script>
-
-
 <template>
   <div class="modal">
     <h2 class="form-heading">Register Form</h2>
     <form @submit.prevent="authStore.signup" class="form-layout">
-      <div class="input-group left-column">
+      <div class="input-group">
+        <label for="name">Full Name</label>
+        <input type="text" id="name" v-model="authStore.name" required>
+      </div>
+      <div class="input-group">
+        <label for="dob">Date of Birth</label>
+        <input type="date" id="dob" v-model="dob" required>
+      </div>
+      <div class="input-group">
         <label for="email">Email</label>
         <input type="email" id="email" v-model="authStore.email" required>
-        
+      </div>
+      <div class="input-group">
         <label for="password">Password</label>
         <input type="password" id="password" v-model="authStore.password" required>
       </div>
-      <div class="input-group right-column">
-        <label for="name">Full Name</label>
-        <input type="text" id="name" v-model="authStore.name" required>
-
-        <label for="dob">Date of Birth</label>
-        <input type="date" id="dob" v-model="authStore.dob" required>
+      <div class="button-container">
+        <button type="submit" :disabled="authStore.loading">
+          Sign Up
+          <span v-if="authStore.loading" class="loader"></span>
+        </button>
       </div>
-      <button type="submit" :disabled="authStore.loading">
-        Sign Up
-        <span v-if="authStore.loading" class="loader"></span>
-      </button>
     </form>
   </div>
 </template>
-
 <style scoped>
 .modal {
   display: flex;
   flex-direction: column;
-  justify-content: center; /* Center vertically */
-  align-items: center; /* Center horizontally */
-  width: 100%; /* Fill the width of the parent */
-  margin: auto; /* Center the modal in the available space */
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 800px;
+  margin: auto;
   padding: 20px;
-  box-sizing: border-box; /* Includes padding and border in size calculations */
-  background: rgba(255, 255, 255, 0.95); /* Slightly transparent white */
-  border-radius: 8px; /* Optional: rounded corners */
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+  background: linear-gradient(135deg, #36454F 0%, #1F262E 100%);
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  color: #FFFFFF;
 }
 
 .form-heading {
   font-size: 24px;
-  color: #333;
-  margin-bottom: 20px; /* Spacing below the heading */
-  position: relative; /* Establish a positioning context for the pseudo-element */
-  padding-bottom: 5px; /* Space for the underline */
-  text-align: center; /* Center the text */
+  margin-bottom: 20px;
+  text-align: center;
+  position: relative;
+  cursor: pointer;
 }
 
-.modal {
-  background: white;
-  padding: 20px; /* Padding inside the modal */
-  border-radius: 8px; /* Rounded corners of the modal */
-  box-sizing: border-box; /* Includes padding in the width calculation */
-  width: 100%; /* Makes the modal responsive */
-  max-width: 600px; /* Maximum width of the modal content */
+.form-heading::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background-color: #FFFFFF;
+  transition: width 0.3s ease, left 0.3s ease;
+}
+
+.form-heading:hover::after {
+  width: 100%;
+  left: 0;
 }
 
 .form-layout {
-  display: flex;
-  flex-direction: row; /* Align children in a row */
-  flex-wrap: wrap; /* Allow wrapping to next line */
-  justify-content: space-between; /* Space between the input columns */
-  gap: 20px; /* Space between the input columns */
+  display: grid; /* Changed to grid layout for two-column layout */
+  grid-template-columns: repeat(2, 1fr); /* Two equal columns */
+  gap: 20px;
+  width: 100%;
+  align-items: center;
+  margin-bottom: 20px; /* Space for the button */
 }
 
 .input-group {
   display: flex;
   flex-direction: column;
-  width: calc(50% - 10px); /* Adjust the width of each column, accounting for the gap */
-  box-sizing: border-box; /* Includes padding and border in the width calculation */
-}
-.label {
-  display: block;
-  margin-bottom: 5px; /* Spacing below each label */
 }
 
 input[type="email"],
 input[type="password"],
 input[type="text"],
 input[type="date"] {
-  width: 100%; /* Makes input take the full width of its container */
-  padding: 10px; /* Padding inside the input */
-  margin-bottom: 20px; /* Spacing below each input */
-  border: 1px solid #ddd; /* Border style for the input */
-  border-radius: 4px; /* Rounded corners for the input */
-  box-sizing: border-box; /* Includes padding and border in the width calculation */
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  background: #2B2E33;
+  border: 1px solid #444C56;
+  color: #FFFFFF;
+  border-radius: 4px;
+}
+
+.button-container {
+  grid-column: 1 / -1; /* Span the button across all columns */
+  display: flex;
+  justify-content: center; /* Center the button */
+  width: 100%;
 }
 
 button {
-  width: 100%; /* Makes button take the full width of its container */
-  padding: 10px; /* Padding inside the button */
-  border: none;
-  background-color: blue;
+  padding: 10px 15px;
+  background: blue;
   color: white;
-  border-radius: 4px; /* Rounded corners for the button */
-  cursor: pointer; /* Changes cursor to pointer on hover */
-  margin-top: 10px; /* Adds space above the button */
+  border-radius: 4px;
+  cursor: pointer;
 }
 
 button:disabled {
-  background-color: grey; /* Grey color for disabled state */
+  background-color: #3E4B59;
 }
 
-button:hover {
-  background-color: darkblue; /* Darker blue on hover */
+button:hover:not(:disabled) {
+  background-color: #3B4D67;
 }
 
 .loader {
   border: 2px solid #f3f3f3;
   border-radius: 50%;
-  border-top: 2px solid blue;
+  border-top: 2px solid #4B6A88;
   width: 12px;
   height: 12px;
   animation: spin 2s linear infinite;
@@ -137,15 +150,13 @@ button:hover {
   100% { transform: rotate(360deg); }
 }
 
-/* Responsive adjustments */
 @media (max-width: 768px) {
   .form-layout {
-    flex-direction: column; /* Stack input groups vertically on smaller screens */
+    grid-template-columns: 1fr; /* Single column layout for smaller screens */
   }
-
-  .input-group {
-    width: 100%; /* Full width input groups on smaller screens */
+  
+  .button-container {
+    order: 3; /* Ensure button is placed after the input groups on smaller screens */
   }
 }
-
 </style>
