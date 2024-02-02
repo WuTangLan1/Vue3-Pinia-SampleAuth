@@ -1,8 +1,8 @@
 import { defineStore } from "pinia";
 import router from '@/router/index.js';
 import { auth, db } from '@/components/Firebase/fbInit.js';
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, sendPasswordResetEmail } from "firebase/auth";
-import { getDoc } from "firebase/firestore";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "firebase/auth";
+import { getDoc} from "firebase/firestore";
 import { doc, setDoc } from 'firebase/firestore'; // Import setDoc and doc
 
 export const useAuthStore = defineStore({
@@ -10,26 +10,30 @@ export const useAuthStore = defineStore({
     state: () => ({
         email: '',
         password: '',
-        name: '',
         dob: null,
         loading: false,
-    }),
+        fullname : '',
+        isAuthenticated : false,
+        user : null,
+
+
+    }),    
     actions: {
         async signup() {
             try {
-                this.loading = true; 
-                console.log(this.email, this.password)
+                this.loading = true;
                 const userCredential = await createUserWithEmailAndPassword(auth, this.email, this.password);
                 const user = userCredential.user;
-                console.log
-                
+        
                 if (user) {
+                    // Save user data to Firestore in the "profiles" collection
                     const userProfile = doc(db, "profiles", user.uid);
                     await setDoc(userProfile, {
-                        full_name: this.name,
-                        dob: this.dob 
+                        cellphone: "null",
+                        email: this.email,
+                        fullname : this.fullname
                     });
-
+        
                     router.replace({ name: 'home' });
                 }
             } catch (error) {
@@ -37,13 +41,13 @@ export const useAuthStore = defineStore({
             } finally {
                 this.loading = false; // Set loading to false regardless of success or failure
             }
-            
-        },
+        },         
 
         async login() {
             try {
                 this.loading = true; 
                 const res = await signInWithEmailAndPassword(auth, this.email, this.password);
+                console.log('hello')
                 if (res) {
                     const user = res.user;
                     const userProfileRef = doc(db, "profiles", user.uid);
@@ -52,7 +56,7 @@ export const useAuthStore = defineStore({
                     if (userProfileSnap.exists()) {
                         const userData = userProfileSnap.data();
                         this.uid = user.uid;
-                        this.name = userData.full_name;
+                        this.fullname = user.fullname
                         this.email = user.email;
                         this.dob = userData.dob; // Convert this back from Timestamp if necessary
                     }
@@ -67,26 +71,32 @@ export const useAuthStore = defineStore({
         },
 
         async logout() {
-            await signOut(auth)
-            router.replace({name: 'login'})
+            await signOut(auth);
+            router.replace({ name: 'home' });
             this.resetInp();
         },
-        async resetPassword(email) {
-            try {
-              await sendPasswordResetEmail(auth, email);
-              // Optionally handle success, display a success message, etc.
-            } catch (error) {
-              console.error('Error sending password reset email:', error);
-              throw error;
-            }
-          },
+        
+
+        initializeAuthListener() {
+            onAuthStateChanged(auth, (user) => {
+                if (user) {
+                    this.isAuthenticated = true;
+                    this.user = user;
+                } else {
+                    this.isAuthenticated = false;
+                    this.user = null;
+                }
+            });
+        },
           
           resetInp() {
             this.email = '',
             this.password = '',
             this.name = '',
             this.dob = null
-        }
-    },
+        },
 
+
+        //-------------------------------------------------------------------------
+    },
 })
